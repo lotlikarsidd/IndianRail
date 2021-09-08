@@ -141,17 +141,17 @@ input::-webkit-calendar-picker-indicator {
             <input name="dateinput" style="margin-left:80px;width:280px" type="date" data-date="" data-date-format="DD MMMM YYYY" value="{{today}}"><br>
             <b>From: </b>
             <br>
-            <select style="margin-left:123px;margin-top:-20px;border-radius:5px;border:1px solid white;width:280px;">
-                <option selected>Select Source..</option>
+            <select name="sourceinput" style="margin-left:123px;margin-top:-20px;border-radius:5px;border:1px solid white;width:280px;">
+                <option  selected>Select Source..</option>
                 {% for s in sourcelist %}
-                <option name="sourceinput" >{{s}}</option>
+                <option  >{{s}}</option>
                 {% endfor %}
             </select><br><br>
             <b>To: </b>
-            <select style="margin-left:97px;margin-top:-20px;border-radius:5px;border:1px solid white;width:280px;">
+            <select name="destinput" style="margin-left:97px;margin-top:-20px;border-radius:5px;border:1px solid white;width:280px;">
                 <option selected>Select Destination..</option>
                 {% for d in destlist %}
-                <option name="destinput" >{{d}}</option>
+                <option  >{{d}}</option>
                 {% endfor %}
             </select><br><br>
             <input style="margin-left:200px;padding-left:10px;width:120px;border-radius:5px;background-color:#fb792b;border:1px solid #fb792b;color:white;right-padding:30px;font-weight:bold;" type="submit" value="Search"></input><br><br>

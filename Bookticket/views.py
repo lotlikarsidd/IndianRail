@@ -8,7 +8,7 @@ from collections import OrderedDict
 from datetime import datetime
 
 
-from .models import Customer,Routes
+from .models import Customer,Routes, Trains
 from django.contrib.auth.hashers import make_password, check_password
 # Create your views here.
 
@@ -177,12 +177,34 @@ def Time(request):
 
 def train(request):
     if request.method == 'POST':
-        if request.POST.get('dateinput') and request.POST.get('sourceinput') and request.POST.get('destinput'):
-            dateinput = request.POST.get('dateinput')
-            sourceinput = request.POST.get('sourceinput')
-            destinput = request.POST.get('destinput')
+        dateinput = request.POST.get('dateinput')
+        sourceinput = request.POST.get('sourceinput')
+        destinput = request.POST.get('destinput')
+        s='Goa'
+        d='Delhi'
+        print("Hello")
+        sql='select * from "Bookticket_routes" where "source"=%s and "destination"=%s;'
+        for p in Routes.objects.raw(sql, (sourceinput, destinput)):
+            print(p.fare)
+            print(p.Route_id)
+        route=p.Route_id
+        yy=0
+        sql1='select * from "Bookticket_trains" where "Route_id_id"=%s and "Time_id_id"!=%s;'
+        for r in Trains.objects.raw(sql1, (route,yy)):
+            print(r.Train_id)
+            print(r.Train_name)
+        Trainname=r.Train_name
+        details=[]
+        details.append(sourceinput)
+        details.append(destinput)
+        details.append(p.Route_id)
+        details.append(r.Train_id)
+        details.append(r.Train_name)
 
-    return render(request, 'train.html')
+
+        print("hey")
+    print("oiii")
+    return render(request, 'train.html',{'sourceinput':sourceinput,'destinput':destinput,'route':route,'Trainname':Trainname})
 
 
 def createpost(request):
@@ -191,4 +213,6 @@ def createpost(request):
 
 
 
-
+'''
+select * from "Bookticket_time" where "Time_id"=(select "Time_id_id" from "Bookticket_trains" where "Train_id" in(select "Train_id" from "Bookticket_schedule" where "date"='2021-09-08')and "Route_id_id"=(select "Route_id" from "Bookticket_routes" where "source"='Goa' and "destination"='Delhi'));
+'''
