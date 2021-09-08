@@ -1,0 +1,315 @@
+{% load static %}
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+<!-- Datepicker -->
+<link href='bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' rel='stylesheet' type='text/css'>
+<script src='bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' type='text/javascript'></script>
+<script src="{% static 'script/bootstrap.min.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'style/bootstrap.min.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+      <link rel="stylesheet" href="{% static 'style/styles.css' %}">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="{% static 'script/script.js' %}"  ></script>
+<style>
+    input {
+    position: relative;
+    width: 150px; height: 20px;
+    color: white;
+    padding-bottom:26px;
+}
+
+input:before {
+    position: absolute;
+    top: 3px; left: 3px;
+    content: attr(data-date);
+    display: inline-block;
+    color: black;
+}
+
+input::-webkit-datetime-edit, input::-webkit-inner-spin-button, input::-webkit-clear-button {
+    display: none;
+}
+
+input::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 3px;
+    right: 0;
+    color: black;
+    opacity: 1;
+}
+    label{
+    font-weight:bold;
+    }
+    .bookall{
+    display:none;
+    position:relative;
+    }
+    .childhide,.konk,.raj{
+    display:none;
+    }
+    .childhide{
+     position:absolute;
+     top:70;
+     left:700;
+     background:black;
+     color:white;
+     height:20px;
+     border:black;
+    }
+    .childb{
+    position:absolute;
+     top:69;
+     left:700;
+     background:black;
+     color:white;
+     height:16px;
+     border:black;
+     font-size:12px;
+    }
+    .child{
+     position:absolute;
+     top:70;
+     left:700;
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <p style="color:white; font-size:25px;"><b>INDIAN RAIL SERVICES &nbsp </b></p>
+  <div  class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link bg-light" href="home/">Home <b>|</b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link bg-light" href="/myticket">My Tickets <b style="color:black">|</b></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link bg-light" href="/booktick">Book A Ticket<b style="color:black"> |</b><span class="sr-only">(current)</span></a>
+      </li>
+      {% if uname %}
+        <a class="text-dark" href="/logout/">Logout</a>
+
+        <a class="btn btn-sm btn-outline-primary m-2"  href=" ">{{uname}}</a>
+
+        {% else %}
+      <li class="nav-item">
+        <a class="nav-link bg-light" href="/login/">Login <b style="color:black">|</b></a>
+      </li>
+           {% endif %}
+
+
+
+    </ul>
+
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+        <button class="childb" style="margin-left:100px;margin-top:50px;z-index:999999999" id="show">v</button>
+        <button class="childhide" style="margin-left:100px;margin-top:50px;z-index:999999999" id="hide">^</button>
+
+<form method="POST" action="train/">
+    {% csrf_token %}
+    <div style="Background-color:#e3e3e3;width:500px;margin-top:50px;margin-left:30%;border-radius:10px;z-index:999">
+        <p style="background-color:black;color:white;text-align:center;border-radius:10px;"><b>BOOK TICKET</b></p>
+        <div class="bookall">
+            <br>
+            <label>Date:</label>
+            <input name="dateinput" style="margin-left:80px;width:280px" type="date" data-date="" data-date-format="DD MMMM YYYY" value="{{today}}"><br>
+            <b>From: </b>
+            <br>
+            <select style="margin-left:123px;margin-top:-20px;border-radius:5px;border:1px solid white;width:280px;">
+                <option selected>Select Source..</option>
+                {% for s in sourcelist %}
+                <option name="sourceinput" >{{s}}</option>
+                {% endfor %}
+            </select><br><br>
+            <b>To: </b>
+            <select style="margin-left:97px;margin-top:-20px;border-radius:5px;border:1px solid white;width:280px;">
+                <option selected>Select Destination..</option>
+                {% for d in destlist %}
+                <option name="destinput" >{{d}}</option>
+                {% endfor %}
+            </select><br><br>
+            <input style="margin-left:200px;padding-left:10px;width:120px;border-radius:5px;background-color:#fb792b;border:1px solid #fb792b;color:white;right-padding:30px;font-weight:bold;" type="submit" value="Search"></input><br><br>
+
+
+        </div>
+    </div>
+</form>
+
+</div>
+<script>
+    $("input").on("change", function() {
+    this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD")
+        .format( this.getAttribute("data-date-format") )
+    )
+}).trigger("change")
+</script>
+<!--
+<script>
+    $(document).ready(function() {
+$("#submit").click(function() {
+var name = $("#name").val();
+var email = $("#email").val();
+var contact = $("#contact").val();
+var gender = $("input[type=radio]:checked").val();
+var msg = $("#msg").val();
+if (name == '' || email == '' || contact == '' || gender == '' || msg == '') {
+alert("Insertion Failed Some Fields are Blank....!!");
+} else {
+// Returns successful data submission message when the entered information is stored in database.
+$.post("views.py", {
+name1: name,
+email1: email,
+contact1: contact,
+gender1: gender,
+msg1: msg
+}, function(data) {
+alert(data);
+$('#form')[0].reset(); // To reset form fields
+});
+}
+});
+});
+Copy
+
+</script>
+-->
+<!--
+<div class='container' style='margin-top: 100px;'>
+
+ <input type='text' class="form-control" id='datepicker' placeholder='Select Date' style='width: 300px;' >
+
+</div>
+-->
+<!-- Script
+<script type="text/javascript">
+$(document).ready(function(){
+
+  $('#datepicker').datepicker({
+    format: "yy-mm-dd",
+    startDate: new Date('2019-12-5'),
+    endDate: new Date('2020-7-12')
+  });
+
+});
+</script>
+ -->
+
+
+
+<footer style="background-color: black;color: white;margin-top: 400px;" >
+    {% load static %}
+    <h1 style="margin-left:5%;">INDIAN RAIL<span style="font-size:20px;margin-top: -30px;color: #01d28e;">&nbsp;&nbsp;&nbsp;
+
+        SERVICES</span></h1>
+      <hr>
+         <div >
+           <div >
+             <a href="#" class="link" style="margin-left:15%;color:whitesmoke">About</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke">Services</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke">Terms and Conditions</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke">Best Price Guarantee</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke"> Privacy &amp; Cookies Policy</a>
+           </div>
+             <hr>
+         </div>
+         <div  >
+            <div style="font-size:14px;color: whitesmoke">
+              <a href="#" class="link" style="color:whitesmoke">Customer Support</a><br>
+              <a href="#" class="link" style="color:whitesmoke">FAQ</a><br>
+              <a href="#" class="link" style="color:whitesmoke">Contact Us</a><br>
+              <a href="#" class="link" style="color:whitesmoke">Have a Questions?</a>
+           </div>
+         </div>
+
+
+
+         <div>
+
+           <p>
+ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+ </p>
+         </div>
+
+   </footer>
+<script>
+$(document).ready(function(){
+  $("#hide").click(function(){
+    $(".bookall").hide();
+    $(".childhide").hide();
+    $(".childb").show();
+    $(".konk").hide();
+    $(".raj").hide();
+
+  });
+  $("#show").click(function(){
+    $(".bookall").show();
+    $(".childb").hide();
+    $(".childhide").show();
+    $(".konk").show();
+    $(".raj").show();
+  });
+});
+
+
+$(".konk").click(function(){
+    $("#rdepart1").hide();
+    $("#rdepart2").hide();
+    $("#kdepart1").show();
+    $("#kdepart2").show();
+
+var printBorder = $(".konk").css("border-color", "goldenrod");
+function changeBorder() {printBorder}
+$(".konk").on("click", changeBorder);
+
+var printBorder = $(".raj").css("border-color", "white");
+function changeBorder() {printBorder}
+$(".raj").on("click", changeBorder);
+
+});
+$(".raj").click(function(){
+    $("#kdepart1").hide();
+    $("#kdepart2").hide();
+    $("#rdepart1").show();
+    $("#rdepart2").show();
+var printBorder = $(".raj").css("border-color", "goldenrod");
+function changeBorder() {printBorder}
+$(".raj").on("click", changeBorder);
+
+var printBorder = $(".konk").css("border-color", "white");
+function changeBorder() {printBorder}
+$(".konk").on("click", changeBorder);
+
+
+  });
+
+</script>
+
+</html>

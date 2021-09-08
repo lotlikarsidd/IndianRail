@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+        body {
+  font-family: Arial;
+}
+
+.coupon {
+  border: 5px dotted #bbb;
+  width: 80%;
+  border-radius: 15px;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.container {
+  padding: 2px 16px;
+  background-color: #f1f1f1;
+}
+
+.promo {
+  background: #ccc;
+  padding: 3px;
+}
+
+.expire {
+  color: red;
+}
+    label{
+    font-weight:bold;
+    }
+    .bookall{
+    display:none;
+    position:relative;
+    }
+    .childhide,.konk,.raj{
+    display:none;
+    }
+    .childhide{
+     position:absolute;
+     top:70;
+     left:700;
+     background:black;
+     color:white;
+     height:20px;
+     border:black;
+    }
+    .childb{
+    position:absolute;
+     top:69;
+     left:700;
+     background:black;
+     color:white;
+     height:16px;
+     border:black;
+     font-size:12px;
+    }
+    .child{
+     position:absolute;
+     top:70;
+     left:700;
+</style>
+
+</style>
+<div align=left>
+<br><br>
+</div>
+<div class="coupon">
+  <div class="container">
+    <h3>My Ticket</h3>
+  </div>
+
+  <div class="container" style="background-color:white">
+  <p>Name : Sagar Shirodkar</p><br>
+  <p>Age : 22</p><br>
+  <p>Email: sshirodkar@oneshield.com</p><br>
+  <p>Ticket from Mumbai to goa</p><br>
+  <p>price: Rs 900</p>
+  <p>seat : S3 35 L</p>
+  </div>
+  <div class="container">
+    <p>Ticket Number <span class="promo">BOH232</span></p>
+    <p class="expire">Expires: Jan 03, 2021</p>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    var minDate ;
+    var maxDate;
+    var mDate
+    var j = jQuery.noConflict();
+    j( "#startTime" ).datepicker({
+    onSelect: function() {
+    minDate = j( "#startTime" ).datepicker("getDate");
+    var mDate = new Date(minDate.setDate(minDate.getDate()));
+    maxDate = new Date(minDate.setDate(minDate.getDate() + 30));
+j("#endTime").datepicker("setDate", maxDate);
+j( "#endTime" ).datepicker( "option", "minDate", mDate);
+j( "#endTime" ).datepicker( "option", "maxDate", maxDate);
+}
+});
+var tdate = new Date();
+var ddate = new Date(tdate.setDate(tdate.getDate() + 10));
+j("#startTime").datepicker("setDate", new Date());
+j( "#endTime" ).datepicker();
+j("#endTime").datepicker("setDate",ddate);
+  });
+</script>
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><div>Please Select Dates:</div>
+	 <p>Strat Date:<input id ="startTime" type="text" ></input></p>
+	 <p>End Date:<input id ="endTime" type="text" ></input></p>
+
+
+
+<footer style="background-color: black;color: white;margin-top: 100px;" >
+    {% load static %}
+    <h1 style="margin-left:5%;">INDIAN RAIL<span style="font-size:20px;margin-top: -30px;color: #01d28e;">&nbsp;&nbsp;&nbsp;
+
+        SERVICES</span></h1>
+      <hr>
+         <div >
+           <div >
+             <a href="#" class="link" style="margin-left:15%;color:whitesmoke">About</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke">Services</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke">Terms and Conditions</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke">Best Price Guarantee</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke"> Privacy &amp; Cookies Policy</a>
+           </div>
+             <hr>
+         </div>
+         <div  >
+            <div style="font-size:14px;color: whitesmoke">
+              <a href="#" class="link" style="color:whitesmoke">Customer Support</a><br>
+              <a href="#" class="link" style="color:whitesmoke">FAQ</a><br>
+              <a href="#" class="link" style="color:whitesmoke">Contact Us</a><br>
+              <a href="#" class="link" style="color:whitesmoke">Have a Questions?</a>
+           </div>
+         </div>
+
+
+
+         <div>
+
+           <p>
+ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+ </p>
+         </div>
+
+
+
+
+
+
+
+
+
+
+<script>
+$(document).ready(function(){
+  $("#hide").click(function(){
+    $(".bookall").hide();
+    $(".childhide").hide();
+    $(".childb").show();
+    $(".konk").hide();
+    $(".raj").hide();
+
+  });
+  $("#show").click(function(){
+    $(".bookall").show();
+    $(".childb").hide();
+    $(".childhide").show();
+    $(".konk").show();
+    $(".raj").show();
+  });
+});
+
+
+$(".konk").click(function(){
+    $("#rdepart1").hide();
+    $("#rdepart2").hide();
+    $("#kdepart1").show();
+    $("#kdepart2").show();
+
+var printBorder = $(".konk").css("border-color", "goldenrod");
+function changeBorder() {printBorder}
+$(".konk").on("click", changeBorder);
+
+var printBorder = $(".raj").css("border-color", "white");
+function changeBorder() {printBorder}
+$(".raj").on("click", changeBorder);
+
+});
+$(".raj").click(function(){
+    $("#kdepart1").hide();
+    $("#kdepart2").hide();
+    $("#rdepart1").show();
+    $("#rdepart2").show();
+var printBorder = $(".raj").css("border-color", "goldenrod");
+function changeBorder() {printBorder}
+$(".raj").on("click", changeBorder);
+
+var printBorder = $(".konk").css("border-color", "white");
+function changeBorder() {printBorder}
+$(".konk").on("click", changeBorder);
+
+
+  });
+</script>
+
+</html>
+    {% endblock %}
+
+
+    <html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+<script src="{% static 'script/bootstrap.min.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'style/bootstrap.min.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+      <link rel="stylesheet" href="{% static 'style/styles.css' %}">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="{% static 'script/script.js' %}"  ></script>
+<style>
+

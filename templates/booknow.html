@@ -1,0 +1,296 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
+
+<!-- Datepicker -->
+<link href='bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' rel='stylesheet' type='text/css'>
+<script src='bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' type='text/javascript'></script>
+<script src="{% static 'script/bootstrap.min.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="{% static 'style/bootstrap.min.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="{% static 'script/script.js' %}"  ></script>
+
+
+<style>
+    .card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 70%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+    label{
+    font-weight:bold;
+    }
+    .bookall{
+    display:none;
+    position:relative;
+    }
+    .childhide,.konk,.raj{
+    display:none;
+    }
+    .childhide{
+     position:absolute;
+     top:70;
+     left:700;
+     background:black;
+     color:white;
+     height:20px;
+     border:black;
+    }
+    .childb{
+    position:absolute;
+     top:69;
+     left:700;
+     background:black;
+     color:white;
+     height:16px;
+     border:black;
+     font-size:12px;
+    }
+    .child{
+     position:absolute;
+     top:70;
+     left:700;
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <p style="color:white; font-size:25px;"><b>INDIAN RAIL SERVICES </b>&nbsp </p>
+  <div  class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link bg-light" href="home/">Home <b>|</b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link bg-light" href="/myticket">My Tickets <b style="color:black">|</b></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link bg-light" href="/booktick">Book A Ticket<b style="color:black"> |</b><span class="sr-only">(current)</span></a>
+      </li>
+      {% if uname %}
+        <a class="text-dark" href="/logout/">Logout</a>
+
+        <a class="btn btn-sm btn-outline-primary m-2"  href=" ">{{uname}}</a>
+
+        {% else %}
+      <li class="nav-item">
+        <a class="nav-link bg-light" href="/login/">Login <b style="color:black">|</b></a>
+      </li>
+           {% endif %}
+
+
+
+    </ul>
+
+
+  </div>
+</nav>
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="margin-left:200px;margin-top:100px" class="card">
+  <div class="container">
+    <h4><p style="background-color:#dbdbdb;width:900px"><b>GAKA (2901)</b></p></h4>
+    <p ><span style="font-weight: 700";>10:00 | GOA |</span><span style="font-weight:470"> THU, 03 Sept </span>     <span style="margin-left:20px;font-weight:700;"> 8:32 | KARNATAKA |</span> THU, 03 Sept</p>
+
+    <p><b>AVAILABLE</b></p>
+      <div style="width:700px;border-radius:10px;background-color:#dbdbdb;margin-left:100px"id="order-details-booking"><br>
+        <div class="row">
+          <div   class="form-holder col-xs-12">
+            <div class="input-field col s4">
+                <input style="border-radius:5px;border:1px solid black;width:650px"type="text" id="item-code" placeholder="Passenger Name"/>
+            </div><br>
+            <div class="input-field col s2">
+                <input style="border-radius:5px;border:1px solid black;width:650px"type="text" id="item-code" placeholder="Enter age of passenger" />
+            </div><br>
+            <div class="input-field col s5">
+                <input style="border-radius:5px;border:1px solid black;width:650px"type="text" id="item-code" placeholder="Enter Phone no. of passenger" />
+            </div><br>
+              <div class="input-field col s6">
+                <input style="border-radius:5px;border:1px solid black;width:650px"type="text" id="item-code" placeholder="Enter Aadhaar no. of passenger" />
+            </div><br>
+              <div style="margin-left:20px;">
+                  <b>Gender:</b> male <input type="radio" name="gender">
+          female <input type="radio" name="gender">
+          others <input type="radio" name="gender">
+            </div><br>
+            <div class="col s1">
+                <i class="material-icons remove" style="background-color:white;border-radius:5px;"><b style="width:100px;cursor: pointer;padding-left:10px;padding-right:10px;">Remove Details</b></i>
+                <p style="background-color:white;width:750px;margin-left:-30px;margin-top:10px;">.</p>
+
+            </div><br>
+
+          </div>
+          <div class="form-holder-append"></div>
+          <div class="row">
+                    <div class="col-xs-4">
+                                    <i class="material-icons add" style="background-color:#fb792b;color:white;border-radius:5px;margin-left:20px;"><b style="width:100px;cursor: pointer;padding-left:10px;padding-right:10px;">+ ADD Details</b></i>
+
+            </div></div>
+    </div>
+</div>
+    <input style="margin-left:200px;padding-left:10px;width:120px;border-radius:5px;background-color:#fb792b;border:1px solid #fb792b;color:white;right-padding:30px;font-weight:bold;" onclick="location.href='/booknow';" type="submit" value="BOOK NOW"></input>
+
+  </div>
+</div>
+
+
+
+<script>
+    var id_count = 1;
+  $('.add').on('click', function() {
+    var source = $('.form-holder:first'), clone = source.clone();
+    clone.find(':input').attr('id', function(i, val) {
+      return val + id_count;
+    });
+    clone.appendTo('.form-holder-append');
+    id_count++;
+  });
+
+// Removing Form Field
+$('body').on('click', '.remove', function() {
+    var closest = $(this).closest('.form-holder').remove();
+  });
+</script>
+
+
+
+
+
+
+<footer style="background-color: black;color: white;margin-top: 400px;" >
+    {% load static %}
+    <h1 style="margin-left:5%;">INDIAN RAIL<span style="font-size:20px;margin-top: -30px;color: #01d28e;">&nbsp;&nbsp;&nbsp;
+
+        SERVICES</span></h1>
+      <hr>
+         <div >
+           <div >
+             <a href="#" class="link" style="margin-left:15%;color:whitesmoke">About</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke">Services</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke">Terms and Conditions</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke">Best Price Guarantee</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke"> Privacy &amp; Cookies Policy</a>
+           </div>
+             <hr>
+         </div>
+         <div  >
+            <div style="font-size:14px;color: whitesmoke">
+              <a href="#" class="link" style="color:whitesmoke">Customer Support</a><br>
+              <a href="#" class="link" style="color:whitesmoke">FAQ</a><br>
+              <a href="#" class="link" style="color:whitesmoke">Contact Us</a><br>
+              <a href="#" class="link" style="color:whitesmoke">Have a Questions?</a>
+           </div>
+         </div>
+
+
+
+         <div>
+
+           <p>
+ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+ </p>
+         </div>
+
+
+    <div id="repeatDiv">repeat</div>
+
+
+   </footer>
+<script>
+$(document).ready(function(){
+  $("#hide").click(function(){
+    $(".bookall").hide();
+    $(".childhide").hide();
+    $(".childb").show();
+    $(".konk").hide();
+    $(".raj").hide();
+
+  });
+  $("#show").click(function(){
+    $(".bookall").show();
+    $(".childb").hide();
+    $(".childhide").show();
+    $(".konk").show();
+    $(".raj").show();
+  });
+});
+
+
+$(".konk").click(function(){
+    $("#rdepart1").hide();
+    $("#rdepart2").hide();
+    $("#kdepart1").show();
+    $("#kdepart2").show();
+
+var printBorder = $(".konk").css("border-color", "goldenrod");
+function changeBorder() {printBorder}
+$(".konk").on("click", changeBorder);
+
+var printBorder = $(".raj").css("border-color", "white");
+function changeBorder() {printBorder}
+$(".raj").on("click", changeBorder);
+
+});
+$(".raj").click(function(){
+    $("#kdepart1").hide();
+    $("#kdepart2").hide();
+    $("#rdepart1").show();
+    $("#rdepart2").show();
+var printBorder = $(".raj").css("border-color", "goldenrod");
+function changeBorder() {printBorder}
+$(".raj").on("click", changeBorder);
+
+var printBorder = $(".konk").css("border-color", "white");
+function changeBorder() {printBorder}
+$(".konk").on("click", changeBorder);
+
+$.each(1, $(".number"), function (index, value) {
+ $("addme").show();
+ });
+
+  });
+
+</script>
+
+{% endblock %}

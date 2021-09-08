@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+
+
+{% load static %}
+{% block content %}
+
+<body>
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel" data-interval="10">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'img/train.jpg' %}" style="width:100%;height:70%;border:5px solid black;margin-top:60px;" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/train4.jpg' %}" style="width:100%;height:70%;border:5px solid black;margin-top:60px;" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/train5.jpg' %}" style="width:100%;height:70%;border:5px solid black;margin-top:60px;" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/train.jpg' %}" style="width:100%;height:70%;border:5px solid black;margin-top:60px;" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  </div>
+</body>
+
+<footer style="background-color: black;color: white;margin-top: 100px;" >
+    {% load static %}
+    <h1 style="margin-left:5%;">INDIAN RAIL<span style="font-size:20px;margin-top: -30px;color: #01d28e;">&nbsp;&nbsp;&nbsp;
+
+        SERVICES</span></h1>
+      <hr>
+         <div >
+           <div >
+             <a href="#" class="link" style="margin-left:15%;color:whitesmoke">About</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke">Services</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke">Terms and Conditions</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke">Best Price Guarantee</a>
+             <a href="#" class="link" style="margin-left:5%;color:whitesmoke"> Privacy &amp; Cookies Policy</a>
+           </div>
+             <hr>
+         </div>
+         <div  >
+            <div style="font-size:14px;color: whitesmoke">
+              <a href="#" class="link" style="color:whitesmoke">Customer Support</a><br>
+              <a href="#" class="link" style="color:whitesmoke">FAQ</a><br>
+              <a href="#" class="link" style="color:whitesmoke">Contact Us</a><br>
+              <a href="#" class="link" style="color:whitesmoke">Have a Questions?</a>
+           </div>
+         </div>
+
+
+
+         <div>
+
+           <p>
+ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+ </p>
+         </div>
+
+   </footer>
+
+{% endblock %}
