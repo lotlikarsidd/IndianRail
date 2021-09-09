@@ -169,7 +169,30 @@ today = date.today()
 
 
 def booknow(request):
-    return render(request, 'booknow.html')
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        route = request.POST.get('route')
+        arrival = request.POST.get('arrival')
+        source = request.POST.get('source')
+        date= request.POST.get('date')
+        dest = request.POST.get('dest')
+        depart = request.POST.get('depart')
+        id = request.POST.get('id')
+
+
+
+
+
+
+
+
+
+
+
+        dateinput = request.POST.get('dateinput')
+        sourceinput = request.POST.get('sourceinput')
+        destinput = request.POST.get('destinput')
+    return render(request, 'booknow.html',{'name':name,'route':route,'arrival':arrival,'source':source,'date':date,'dest':dest,'depart':depart})
 
 
 def Timeme(request):

@@ -3,6 +3,10 @@
 {% block content %}
 <html xmlns="http://www.w3.org/1999/html">
 <head>
+     <link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="Stylesheet"
+        type="text/css" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -103,7 +107,7 @@ input::-webkit-calendar-picker-indicator {
         <div class="bookall">
             <br>
             <label>Date:</label>
-            <input name="dateinput" style="margin-left:80px;width:280px" type="date" data-date="" data-date-format="YYYY-MM-DD" value="{{today}}"><br>
+            <input style="margin-left:80px;width:280px;" name="dateinput" type="date" id="txtDate" data-date="" data-date-format="YYYY-MM-DD" value="{{today}}"/><br>
             <b>From: </b>
             <br>
             <select name="sourceinput" style="margin-left:123px;margin-top:-20px;border-radius:5px;border:1px solid white;width:280px;">
@@ -119,15 +123,32 @@ input::-webkit-calendar-picker-indicator {
                 <option  >{{d}}</option>
                 {% endfor %}
             </select><br><br>
-            <input style="margin-left:200px;padding-left:10px;width:120px;border-radius:5px;background-color:#fb792b;border:1px solid #fb792b;color:white;right-padding:30px;font-weight:bold;" type="submit" value="Search"></input><br><br>
-
-
+                <input style="margin-left:200px;padding-left:10px;width:120px;border-radius:5px;background-color:#fb792b;border:1px solid #fb792b;color:white;right-padding:30px;font-weight:bold;" type="submit" value="Search"></input><br><br>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         </div>
     </div>
 </form>
 
 </div>
 <script>
+$(function(){
+    var dtToday = new Date();
+
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    var minDate= year + '-' + month + '-' + day;
+
+    $('#txtDate').attr('min', minDate);
+});
+
+
+
     $("input").on("change", function() {
     this.setAttribute(
         "data-date",
@@ -135,6 +156,9 @@ input::-webkit-calendar-picker-indicator {
         .format( this.getAttribute("data-date-format") )
     )
 }).trigger("change")
+
+
+
 </script>
 <!--
 <script>
@@ -225,6 +249,29 @@ $(document).ready(function(){
 
    </footer>
 <script>
+
+  // ---------horizontal-navbar-menu-----------
+		var tabsNewAnim = $('#navbar-animmenu');
+		var selectorNewAnim = $('#navbar-animmenu').find('li').length;
+		//var selectorNewAnim = $(".tabs").find(".selector");
+		var activeItemNewAnim = tabsNewAnim.find('.active');
+		var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
+		var itemPosNewAnimLeft = activeItemNewAnim.position();
+		$(".hori-selector").css({
+			"left":itemPosNewAnimLeft.left + "px",
+			"width": activeWidthNewAnimWidth + "px"
+		});
+		$("#navbar-animmenu").on("click","li",function(e){
+			$('#navbar-animmenu ul li').removeClass("active");
+			$(this).addClass('active');
+			var activeWidthNewAnimWidth = $(this).innerWidth();
+			var itemPosNewAnimLeft = $(this).position();
+			$(".hori-selector").css({
+				"left":itemPosNewAnimLeft.left + "px",
+				"width": activeWidthNewAnimWidth + "px"
+			});
+		});
+
 $(document).ready(function(){
   $("#hide").click(function(){
     $(".bookall").hide();
