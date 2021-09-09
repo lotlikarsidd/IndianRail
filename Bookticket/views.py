@@ -197,38 +197,48 @@ def train(request):
         route=p.Route_id
         fare=p.fare
         yy=0
+
         sql1='select * from "Bookticket_trains" where "Route_id_id"=%s and "Time_id_id"!=%s;'
         for r in Trains.objects.raw(sql1, (route,yy)):
             print(r.Train_id)
             ltrainid.append(r.Train_id)
             print(r.Train_name)
             ltrainname.append(r.Train_name)
-        ttime = r.Time_id_id
-        trainid=r.Train_id
-        sql2='select * from "Bookticket_schedule" where "Train_id_id"=%s and "date"=%s;'
-        for q in Schedule.objects.raw(sql2, (trainid, dateinput)):
-            print(f"q : {q}")
-        '''
-        sql4 = 'select * from "Bookticket_trains" where "Train_id"=%s and "Time_id_id"!=%s;'
-        for a in Trains.objects.raw(sql4, (trainid,yy)):
-            '''
+            print("*")
+            trainid=r.Train_id
+            if trainid=="KON17GABN":
+                larrival.append("14:00")
+                ldepart.append("15:00")
+                print(larrival)
+            elif trainid=="SHA19GADL":
+                larrival.append("18:00")
+                ldepart.append("19:00")
+                print(larrival)
+            elif trainid=="KON12GADL":
+                larrival.append("11:00")
+                ldepart.append("12:00")
+                print(larrival)
+            elif trainid=="RAJ17AMGA":
+                larrival.append("14:00")
+                ldepart.append("15:00")
+                print(larrival)
+            else:
+                larrival.append("21:00")
+                ldepart.append("22:00")
+                print(larrival)
+        print("1")
+        sql2='select * from "Bookticket_trains" where "Train_id"!=%s and "Time_id_id"!=%s'
+        for q in Trains.objects.raw(sql2, (trainid,yy)):
+            print(q)
+        print("2")
         Trainname=r.Train_name
-        ldetails=list(itertools.zip_longest(lfare, lroute, ltrainname, ltrainid,larrival,ldepart))
+        ldetails=list(itertools.zip_longest( ltrainname, ltrainid,larrival,ldepart))
         for (f, r, idd, t) in (itertools.zip_longest(lfare, lroute, ltrainid, ltrainname)):
-            newtrain=t
-            finalid=r
             print(r)
         print("hey")
     print("oiii")
-    return render(request, 'train.html',{'ldetails':ldetails,'sourceinput':sourceinput,'destinput':destinput,'route':route,'Trainname':Trainname,'dateinput':dateinput,'fare':fare,'lfare':lfare,'lroute':lroute,'ltrainid':ltrainid,'ltrainname':ltrainname})
+    return render(request, 'train.html',{'ldetails':ldetails,'sourceinput':sourceinput,'destinput':destinput,'route':route,'Trainname':Trainname,'dateinput':dateinput,'fare':fare})
 
 
 def createpost(request):
     return render(request, 'bookticket.html')
-
-
-
-
-'''
-select * from "Bookticket_time" where "Time_id"=(select "Time_id_id" from "Bookticket_trains" where "Train_id" in(select "Train_id" from "Bookticket_schedule" where "date"='2021-09-08')and "Route_id_id"=(select "Route_id" from "Bookticket_routes" where "source"='Goa' and "destination"='Delhi'));
-'''

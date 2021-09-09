@@ -4,8 +4,8 @@ from django.db import models
 
 class Time(models.Model):
     Time_id = models.IntegerField(primary_key=True)
-    Arrival_Time = models.TimeField()
-    Departure_Time = models.TimeField()
+    Arrival_Time = models.CharField(max_length=5)
+    Departure_Time = models.CharField(max_length=5)
 
 
 class Routes(models.Model):
