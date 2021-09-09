@@ -6,9 +6,10 @@ from django.contrib.auth import authenticate, login
 from Bookticket.models import Customer
 from collections import OrderedDict
 from datetime import datetime
+import itertools
 
 
-from .models import Customer,Routes, Trains
+from .models import Customer,Routes, Trains, Schedule, Time
 from django.contrib.auth.hashers import make_password, check_password
 # Create your views here.
 
@@ -171,7 +172,7 @@ def booknow(request):
     return render(request, 'booknow.html')
 
 
-def Time(request):
+def Timeme(request):
     return render(request, 'bookticket.html')
 
 
@@ -180,31 +181,46 @@ def train(request):
         dateinput = request.POST.get('dateinput')
         sourceinput = request.POST.get('sourceinput')
         destinput = request.POST.get('destinput')
-        s='Goa'
-        d='Delhi'
         print("Hello")
+        lfare=[]
+        lroute=[]
+        ltrainid=[]
+        ltrainname=[]
+        larrival=[]
+        ldepart=[]
         sql='select * from "Bookticket_routes" where "source"=%s and "destination"=%s;'
         for p in Routes.objects.raw(sql, (sourceinput, destinput)):
             print(p.fare)
+            lfare.append(p.fare)
             print(p.Route_id)
+            lroute.append(p.Route_id)
         route=p.Route_id
+        fare=p.fare
         yy=0
         sql1='select * from "Bookticket_trains" where "Route_id_id"=%s and "Time_id_id"!=%s;'
         for r in Trains.objects.raw(sql1, (route,yy)):
             print(r.Train_id)
+            ltrainid.append(r.Train_id)
             print(r.Train_name)
+            ltrainname.append(r.Train_name)
+        ttime = r.Time_id_id
+        trainid=r.Train_id
+        sql2='select * from "Bookticket_schedule" where "Train_id_id"=%s and "date"=%s;'
+        for q in Schedule.objects.raw(sql2, (trainid, dateinput)):
+            print(f"q : {q}")
+        '''
+        sql4 = 'select * from "Bookticket_trains" where "Train_id"=%s and "Time_id_id"!=%s;'
+        for a in Trains.objects.raw(sql4, (trainid,yy)):
+            '''
         Trainname=r.Train_name
-        details=[]
-        details.append(sourceinput)
-        details.append(destinput)
-        details.append(p.Route_id)
-        details.append(r.Train_id)
-        details.append(r.Train_name)
-
-
+        ldetails=list(itertools.zip_longest(lfare, lroute, ltrainname, ltrainid,larrival,ldepart))
+        for (f, r, idd, t) in (itertools.zip_longest(lfare, lroute, ltrainid, ltrainname)):
+            newtrain=t
+            finalid=r
+            print(r)
         print("hey")
     print("oiii")
-    return render(request, 'train.html',{'sourceinput':sourceinput,'destinput':destinput,'route':route,'Trainname':Trainname})
+    return render(request, 'train.html',{'ldetails':ldetails,'sourceinput':sourceinput,'destinput':destinput,'route':route,'Trainname':Trainname,'dateinput':dateinput,'fare':fare,'lfare':lfare,'lroute':lroute,'ltrainid':ltrainid,'ltrainname':ltrainname})
 
 
 def createpost(request):
