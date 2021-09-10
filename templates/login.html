@@ -51,30 +51,29 @@
 </head>
 <body>
 
-        <button class="childb" style="margin-left:100px;margin-top:50px;z-index:99" id="show">v</button>
-        <button class="childhide" style="margin-left:100px;margin-top:50px;z-index:99" id="hide">^</button>
+
 
 <form method="POST" action="">
     {% csrf_token %}
     <div style="Background-color:#e3e3e3;width:500px;margin-top:50px;margin-left:30%;border-radius:10px;z-index:999">
-        <p style="background-color:black;color:white;text-align:center;border-radius:10px;"><b>LOGIN FORM</b>
+        <p style="background-color:#F7A200;color:white;text-align:center;border-radius:5px;height:40px;font-size:20px;"><b>LOGIN FORM</b>
 </p>
 
         <div class="bookall">
 
 {% csrf_token %}
-    <label for="Email">Email:</label>
+    <label for="Email">&nbsp Email:</label>
     <input style="margin-left:90px;border-radius:5px;border:1px solid white;width:280px;" type="text" placeholder="Enter email" name="email"></input><br>
-    <label for="Age">Password:</label>
-    <input style="margin-left:60px;border-radius:5px;border:1px solid white;width:280px;" type="password" placeholder="Enter Password" name="password"></input><br>
-    <input style="margin-left:180px;width:120px;border-radius:5px;border:1px solid black;"type="submit"></input>
+    <label for="Age">&nbsp Password:</label>
+    <input style="margin-left:60px;border-radius:5px;border:1px solid white;width:280px;" type="password" placeholder="Enter Password" name="password"></input><br><br>
+    <input style="margin-left:190px;width:120px;border-radius:5px;border:1px solid #fb792b;color:white;background-color:#fb792b;font-size:18px"type="submit"><br><br>
    </div>
     </div>
 
 
 </form>
 
-<p style="text-align:center">don't have an account? <a href="/register">Register now</a></p>
+<p style="text-align:center">Don't have an account? <a href="/register">Register now</a></p>
 
 
 
@@ -114,42 +113,5 @@
          </div>
 
    </footer>
-<script>
-$(document).ready(function(){
-  $("#hide").click(function(){
-    $(".bookall").hide();
-    $(".childhide").hide();
-    $(".childb").show();
 
-  });
-  $("#show").click(function(){
-    $(".bookall").show();
-    $(".childb").hide();
-    $(".childhide").show();
-  });
-});
-</script>
-        <script>
-  // ---------horizontal-navbar-menu-----------
-		var tabsNewAnim = $('#navbar-animmenu');
-		var selectorNewAnim = $('#navbar-animmenu').find('li').length;
-		//var selectorNewAnim = $(".tabs").find(".selector");
-		var activeItemNewAnim = tabsNewAnim.find('.active');
-		var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
-		var itemPosNewAnimLeft = activeItemNewAnim.position();
-		$(".hori-selector").css({
-			"left":itemPosNewAnimLeft.left + "px",
-			"width": activeWidthNewAnimWidth + "px"
-		});
-		$("#navbar-animmenu").on("click","li",function(e){
-			$('#navbar-animmenu ul li').removeClass("active");
-			$(this).addClass('active');
-			var activeWidthNewAnimWidth = $(this).innerWidth();
-			var itemPosNewAnimLeft = $(this).position();
-			$(".hori-selector").css({
-				"left":itemPosNewAnimLeft.left + "px",
-				"width": activeWidthNewAnimWidth + "px"
-			});
-		});
-</script>
 {% endblock %}

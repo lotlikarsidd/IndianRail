@@ -100,13 +100,11 @@ input::-webkit-calendar-picker-indicator {
 <body>
 
 
-        <button class="childb" style="margin-left:100px;margin-top:50px;z-index:999999999" id="show">v</button>
-        <button class="childhide" style="margin-left:100px;margin-top:50px;z-index:999999999" id="hide">^</button>
-
+<br>
 <form method="POST" action="train/">
     {% csrf_token %}
     <div style="Background-color:#e3e3e3;width:500px;margin-top:50px;margin-left:30%;border-radius:10px;z-index:999">
-        <p style="background-color:black;color:white;text-align:center;border-radius:10px;"><b>BOOK TICKET</b></p>
+        <p style="background-color:#F7A200;font-size:25px;color:white;text-align:center;border-radius:5px;height:50px;"><b>BOOK TICKET</b></p>
         <div class="bookall">
             <br>
             <label>&nbsp Date:</label>
@@ -255,57 +253,6 @@ $(document).ready(function(){
 <script>
 
 
-$(document).ready(function(){
-  $("#hide").click(function(){
-    $(".bookall").hide();
-    $(".childhide").hide();
-    $(".childb").show();
-    $(".konk").hide();
-    $(".raj").hide();
-
-  });
-  $("#show").click(function(){
-    $(".bookall").show();
-    $(".childb").hide();
-    $(".childhide").show();
-    $(".konk").show();
-    $(".raj").show();
-  });
-});
-
-
-$(".konk").click(function(){
-    $("#rdepart1").hide();
-    $("#rdepart2").hide();
-    $("#kdepart1").show();
-    $("#kdepart2").show();
-
-var printBorder = $(".konk").css("border-color", "goldenrod");
-function changeBorder() {printBorder}
-$(".konk").on("click", changeBorder);
-
-var printBorder = $(".raj").css("border-color", "white");
-function changeBorder() {printBorder}
-$(".raj").on("click", changeBorder);
-
-});
-$(".raj").click(function(){
-    $("#kdepart1").hide();
-    $("#kdepart2").hide();
-    $("#rdepart1").show();
-    $("#rdepart2").show();
-var printBorder = $(".raj").css("border-color", "goldenrod");
-function changeBorder() {printBorder}
-$(".raj").on("click", changeBorder);
-
-var printBorder = $(".konk").css("border-color", "white");
-function changeBorder() {printBorder}
-$(".konk").on("click", changeBorder);
-
-
-  });
-
-</script>
 
 </html>
 {% endblock %}

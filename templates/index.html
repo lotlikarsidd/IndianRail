@@ -12,6 +12,19 @@
 
 
 <style>
+.move {
+
+  position: relative;
+  animation: myfirst 20s 2;
+  animation-direction: alternate;
+}
+@keyframes myfirst {
+  0%   { left: 1000px; top: 0px;}
+  25%  { left: -2000px; top: 0px;}
+  50%   { left: 0px; top: 0px;}
+  100%  { left: -2000px; top: 0px;}
+}
+
     .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
@@ -82,6 +95,18 @@
   </div>
 </div>
 
+<p style="background-color:#F7A200;height:180px;margin-top:50px">   <img style="margin-left:560px;marigin-top:-100px"src="{% static 'img/pngegg (2).png' %}" width="180px" height="180px">
+</p>
+<div style="margin-top:100px;">
+    {% load static %}
+    <img style="margin-top:-300px;"src="{% static 'img/pngegg (1).png' %}" width="500px">
+
+    <img class="move" style="position:relative;" src="{% static 'img/pngegg.png' %}" width="800px">
+    <img  style="position:relative;margin-top:-350px;margin-left:-10px" src="{% static 'img/pngegg (4).png' %}" width="100%" height="400px">
+
+
+</div>
+<div id="train"></div>
 
 <footer style="background-color: black;color: white;margin-top: 400px;" >
     {% load static %}
