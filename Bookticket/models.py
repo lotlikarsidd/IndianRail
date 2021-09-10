@@ -2,6 +2,7 @@ from django.db import models
 # Create your models here.
 
 
+
 class Time(models.Model):
     Time_id = models.IntegerField(primary_key=True)
     Arrival_Time = models.CharField(max_length=5)

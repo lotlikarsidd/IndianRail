@@ -292,28 +292,7 @@ i {
 <body>
 
 
-<div id="navbar-animmenu">
-        <ul class="show-dropdown main-navbar">
-            <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
-            <li>
-                <a href="javascript:void(0);"><i class="fas fa-tachometer-alt"></i>Home</a>
-            </li>
-            <li class="active">
-                <a href="javascript:void(0);"><i class="far fa-address-book"></i>My Tickets</a>
-            </li>
-            <li>
-                <a href="javascript:void(0);"><i class="far fa-clone"></i>Book Ticket</a>
-            </li>
-            <li>
-                <a href="javascript:void(0);"><i class="far fa-calendar-alt"></i>Login</a>
-            </li>
-            <li>
-                <a href="javascript:void(0);"><i class="far fa-chart-bar"></i>Logout</a>
-            </li>
 
-
-        </ul>
-    </div>
 
 
 
@@ -451,27 +430,7 @@ $('body').on('click', '.remove', function() {
 
    </footer>
 <script>
-// ---------horizontal-navbar-menu-----------
-		var tabsNewAnim = $('#navbar-animmenu');
-		var selectorNewAnim = $('#navbar-animmenu').find('li').length;
-		//var selectorNewAnim = $(".tabs").find(".selector");
-		var activeItemNewAnim = tabsNewAnim.find('.active');
-		var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
-		var itemPosNewAnimLeft = activeItemNewAnim.position();
-		$(".hori-selector").css({
-			"left":itemPosNewAnimLeft.left + "px",
-			"width": activeWidthNewAnimWidth + "px"
-		});
-		$("#navbar-animmenu").on("click","li",function(e){
-			$('#navbar-animmenu ul li').removeClass("active");
-			$(this).addClass('active');
-			var activeWidthNewAnimWidth = $(this).innerWidth();
-			var itemPosNewAnimLeft = $(this).position();
-			$(".hori-selector").css({
-				"left":itemPosNewAnimLeft.left + "px",
-				"width": activeWidthNewAnimWidth + "px"
-			});
-		});
+
 $(document).ready(function(){
   $("#hide").click(function(){
     $(".bookall").hide();

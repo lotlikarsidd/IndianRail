@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_protect
 from pyexpat.errors import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate,login as django_login, logout as django_logout
 from Bookticket.models import Customer
 from collections import OrderedDict
 from datetime import datetime
@@ -80,7 +80,6 @@ def signup(request):
         return render(request, 'register.html')
 
 
-from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 
 from django.db import connection
@@ -89,11 +88,12 @@ from django.db import connection
 
 def logout(request):
     # Log out the user.
-    logout(request)
+    django_logout(request)
     # Return to homepage.
-    return render(request, 'home.html')
+    return render(request, 'index.html')
 
-@login_required(login_url='/login/')
+
+
 @csrf_protect
 def login(request):
     if request.method == 'POST':
@@ -125,12 +125,19 @@ def login(request):
             x=check_password(password,p.Password)
             if x==True:
                 print("success")
+                user = authenticate(request, username=email, password=password)
+                if(authenticate(request, email=email, password=p.Password)):
+                    print("loggedin")
+                django_login(request, user)
+
+
 
             return render(request, 'index.html',{'username':username})
 
             print("failed")
             return render(request, 'login.html')
             user = authenticate(request, Phone=phone, Password=password)
+
             if user is not None:
                 return render(request, 'index.html')
             else:
@@ -265,3 +272,5 @@ def train(request):
 
 def createpost(request):
     return render(request, 'bookticket.html')
+
+

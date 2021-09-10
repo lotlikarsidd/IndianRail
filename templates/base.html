@@ -132,14 +132,17 @@
       <li class="nav-item active">
         <a class="nav-link bg-light" href="/home">Home <b>|</b><span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
         <a class="nav-link bg-light" href="/myticket">My Tickets <b style="color:black">|</b></a>
       </li>
       <li class="nav-item">
         <a class="nav-link bg-light" href="/booktick/">Book A Ticket <b style="color:black">|</b></a>
       </li>
-        {% if user.is_authenticated %}
-        <a class="text-dark" href="/logout/">Logout</a>
+        <li class="nav-item">
+        <a class="nav-link bg-light" href="/logout/">Logout <b style="color:black">|</b></a>
+      </li>
 
         <a class="btn btn-sm btn-outline-primary m-2"  href=" ">{{user|title}}</a>
           {% else %}
@@ -154,31 +157,12 @@
 
     </ul>
 
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+
   </div>
 </nav>
 
 <div id="navbar-animmenu">
         <ul class="show-dropdown main-navbar">
-            <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
-            <li>
-                <a href="/home"><i class="fas fa-tachometer-alt"></i>Home</a>
-            </li>
-            <li class="active">
-                <a href="/myticket"><i class="far fa-address-book"></i>My Tickets</a>
-            </li>
-            <li>
-                <a href="/booktick/"><i class="far fa-clone"></i>Book Ticket</a>
-            </li>
-            <li>
-                <a href="/login"><i class="far fa-calendar-alt"></i>Login</a>
-            </li>
-            <li>
-                <a href="/logout/"><i class="far fa-chart-bar"></i>Logout</a>
-            </li>
 
 
         </ul>
