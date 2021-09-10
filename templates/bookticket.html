@@ -3,6 +3,9 @@
 {% block content %}
 <html xmlns="http://www.w3.org/1999/html">
 <head>
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/jquery-ui.min.js"></script>
      <link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="Stylesheet"
         type="text/css" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
@@ -63,7 +66,7 @@ input::-webkit-calendar-picker-indicator {
     font-weight:bold;
     }
     .bookall{
-    display:none;
+    display:block;
     position:relative;
     }
     .childhide,.konk,.raj{
@@ -106,9 +109,9 @@ input::-webkit-calendar-picker-indicator {
         <p style="background-color:black;color:white;text-align:center;border-radius:10px;"><b>BOOK TICKET</b></p>
         <div class="bookall">
             <br>
-            <label>Date:</label>
-            <input style="margin-left:80px;width:280px;" name="dateinput" type="date" id="txtDate" data-date="" data-date-format="YYYY-MM-DD" value="{{today}}"/><br>
-            <b>From: </b>
+            <label>&nbsp Date:</label>
+            <input style="margin-left:70px;width:280px;border:1px solid white" name="dateinput" type="date" id="txtDate" data-date="" data-date-format="YYYY-MM-DD" value="{{today}}"/><br>
+            <b>&nbsp Source: </b>
             <br>
             <select name="sourceinput" style="margin-left:123px;margin-top:-20px;border-radius:5px;border:1px solid white;width:280px;">
                 <option  selected>Select Source..</option>
@@ -116,8 +119,8 @@ input::-webkit-calendar-picker-indicator {
                 <option  >{{s}}</option>
                 {% endfor %}
             </select><br><br>
-            <b>To: </b>
-            <select name="destinput" style="margin-left:97px;margin-top:-20px;border-radius:5px;border:1px solid white;width:280px;">
+            <b>&nbsp Destination: </b>
+            <select name="destinput" style="margin-left:20px;margin-top:-20px;border-radius:5px;border:1px solid white;width:280px;">
                 <option selected>Select Destination..</option>
                 {% for d in destlist %}
                 <option  >{{d}}</option>
@@ -128,6 +131,7 @@ input::-webkit-calendar-picker-indicator {
         </div>
     </div>
 </form>
+
 
 </div>
 <script>
