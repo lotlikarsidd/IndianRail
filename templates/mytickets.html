@@ -102,7 +102,24 @@
 
 
 
+
 <div class="card">
+    {% if data %}
+                {% for Passenger in data %}
+                     <img src="{% static 'img/KONKAN.jpg' %}" alt="Train Image" style="width:100%">
+                     <tr>
+                         <p style="font-size:20px"><b>Pid:{{Passenger.P_id}}</b></p>
+                         <p><b>Name:{{Passenger.name}}  &nbsp&nbsp&nbsp&nbsp    Age:{{Passenger.Age}}</b></p>
+                         <td></td>
+                         <p><b>Date of Booking:</b>{{Passenger.Dare_of_booking}}</p>
+                         <td><b>Date of Onboarding:</b>{{Passenger.On_boarding_Date}}</td>
+                         <td><b>Aadhaar No:</b>{{Passenger.Aadhar}}</td>
+                         <td><b>Phone:</b>{{Passenger.Phone}}</td>
+                         <td><b>Gender:</b>{{Passenger.Gender}}</td>
+                         <td><b>Ticket ID:</b>{{Passenger.Ticket_id}}</td>
+                     </tr>
+                 {% endfor %}
+           {% endif %}
   <img src="{% static 'img/KONKAN.jpg' %}" alt="Train Image" style="width:100%">
   <h1>KONKAN  (KON7AMGADL)</h1>
   <p class="source"> SOURCE: GOA</p>
@@ -113,6 +130,8 @@
   <p class="price"> PRICE: Rs 2500</p>
   <p><button>Cancel Ticket</button></p>
 </div>
+
+
 <script>
 
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

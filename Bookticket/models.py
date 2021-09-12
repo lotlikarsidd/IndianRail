@@ -24,7 +24,7 @@ class Trains(models.Model):
 
 
 class Tickets(models.Model):
-    Ticket_id = models.IntegerField(primary_key=True)
+    Ticket_id = models.AutoField(primary_key=True)
     Train_id = models.ForeignKey(Trains, on_delete=models.CASCADE)
     Compartment_no = models.CharField(max_length=5)
     Berth_type = models.CharField(max_length=10)
@@ -56,3 +56,4 @@ class Passenger(models.Model):
 class Schedule(models.Model):
     date = models.DateField()
     Train_id = models.ForeignKey(Trains, on_delete=models.CASCADE)
+

@@ -8,6 +8,7 @@ from collections import OrderedDict
 from datetime import datetime
 import itertools
 from django.contrib import messages
+from .models import Tickets, Passenger
 
 
 
@@ -27,6 +28,8 @@ from django.views.generic.base import TemplateView
 # Create your views here.
 global page
 page=0
+Trainid=''
+useremail='sidd@gmail.com'
 
 
 def home(request):
@@ -163,7 +166,10 @@ def getusername():
     return usern
 
 def myticket(request):
-    return render(request, 'mytickets.html')
+    q = useremail
+    data = Passenger.objects.filter(Email_id=q)
+    print(data)
+    return render(request, 'mytickets.html', {'data': data})
 
 
 
@@ -199,7 +205,8 @@ def booknow(request):
 
 
 
-        return render(request, 'booknow.html',{'name':name,'route':route,'arrival':arrival,'source':source,'date':date,'dest':dest,'depart':depart})
+
+        return render(request, 'booknow.html',{'name':name,'route':route,'arrival':arrival,'source':source,'date':date,'dest':dest,'depart':depart,'id':id})
 
 
 
@@ -242,6 +249,10 @@ def train(request):
             for r in Trains.objects.raw(sql1, (route, yy)):
                 print(r.Train_id)
                 ltrainid.append(r.Train_id)
+
+                global Trainid
+                Trainname = r.Train_name
+
                 print(r.Train_name)
                 ltrainname.append(r.Train_name)
                 print("*")
@@ -271,12 +282,12 @@ def train(request):
             for q in Trains.objects.raw(sql2, (trainid, yy)):
                 print(q.Train_name)
                 print(q)
+
             print("2")
             sql6 = 'select * from "Bookticket_time" where "Time_id"=%s and "Arrival_Time"!=%s'
             for i in timetrain.objects.raw(sql6, (r.Time_id_id, str(yy))):
                 print(i.Arrival_Time, "hellooooo")
                 print(i.Departure_Time)
-            Trainname = r.Train_name
             ldetails = list(itertools.zip_longest(ltrainname, ltrainid, larrival, ldepart))
             for (f, r, idd, t) in (itertools.zip_longest(lfare, lroute, ltrainid, ltrainname)):
                 print(r)
@@ -294,6 +305,8 @@ def createpost(request):
 def confirm(request):
     global page
     page=request.POST.get("page")
+    trainnamenew = request.POST.get("trainnamenew")
+    print("this is name",trainnamenew)
 
     class Train:
         No_of_compartments = 5
@@ -470,8 +483,44 @@ def confirm(request):
                 Train1.Book_Ticket(63)
         (seatid, berth) = Train1.Book_Ticket(age)
         print(berth)
+
+
+        for idid in Trains.objects.filter(Train_name=trainnamenew).values('Train_id'):
+            print(idid.values())
+        for values in idid.values():
+            print(values)
+        Train_id=values
+
+
+        post = Tickets()
+        post.Berth_type = berth
         tno = str(seatid.pop())
+        x=tno.split(' ')
+        post.Compartment_no = x[0]
+        post.Seat_No = int(x[1])
+
+        post.Train_id_id = str(Train_id)
+        post.save()
+        last_booking = str(Tickets.objects.filter().order_by('Ticket_id').last())
+        last=last_booking.replace("Tickets object (",'')
+        last = last.replace(")", '')
+        last=int(last)
+        post = Passenger()
+        today=request.POST.get('bookdate')
+
+        post.name=request.POST.get('pname')
+        post.On_boarding_Date=today
+        post.Age=request.POST.get('page')
+        post.Aadhar=request.POST.get('aadhaar')
+        post.Phone=request.POST.get('phone')
+        post.Gender=request.POST.get('gender')
+        global useremail
+        useremail='sidd@gmail.com'
+        post.Email_id=useremail
+        post.Ticket_id_id=last
+        post.save()
         print(tno)
+
 
         del Train1
         # Save the following on the database besides the train
@@ -505,6 +554,8 @@ def confirm(request):
     page=int(page)
 
     BookIntoTrain(page, 0, 0, 0)  # enter the age and count values
+
+
     print("after bookinto call")
     messages.info(request, 'Your password has been changed successfully!')
     '''
