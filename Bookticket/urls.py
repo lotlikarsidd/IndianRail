@@ -7,6 +7,7 @@ urlpatterns = [
       path('booktick/home/', views.home),
       path('login/', views.login),
       path('register/', views.signup),
+      path('confirm/myticket/', views.myticket),
       path('myticket/', views.myticket),
       path('myticket/home/', views.home),
       path('train/', views.train),

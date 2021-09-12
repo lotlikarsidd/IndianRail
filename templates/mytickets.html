@@ -3,6 +3,34 @@
 
 {% block content %}
 <style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 350px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.price {
+  color: grey;
+  font-size: 22px;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+.card button:hover {
+  opacity: 0.7;
+}
         body {
   font-family: Arial;
 }
@@ -67,53 +95,25 @@
 <div align=left>
 <br><br>
 </div>
-<div class="coupon">
-  <div class="container">
-    <h3>My Ticket</h3>
-  </div>
 
-  <div class="container" style="background-color:white">
-  <p>Name : Sagar Shirodkar</p><br>
-  <p>Age : 22</p><br>
-  <p>Email: sshirodkar@oneshield.com</p><br>
-  <p>Ticket from Mumbai to goa</p><br>
-  <p>price: Rs 900</p>
-  <p>seat : S3 35 L</p>
-  </div>
-  <div class="container">
-    <p>Ticket Number <span class="promo">BOH232</span></p>
-    <p class="expire">Expires: Jan 03, 2021</p>
-  </div>
+
+
+<div class="card">
+  <img src="{% static 'img/thomas.jpg' %}" alt="Train Image" style="width:100%">
+  <h1>KONKAN  (KON7AMGADL)</h1>
+  <p class="source"> SOURCE: GOA</p>
+  <p class="destination"> DESTINATION: DELHI</p>
+  <p class="berth"> BERTH: LOWER</p>
+  <p class="compartment"> COMPARTMENT: S3</p>
+  <p class="seatno"> SEAT NO: 36</p>
+  <p class="price"> PRICE: Rs 2500</p>
+  <p><button>Cancel Ticket</button></p>
 </div>
-
 <script>
-$(document).ready(function() {
-    var minDate ;
-    var maxDate;
-    var mDate
-    var j = jQuery.noConflict();
-    j( "#startTime" ).datepicker({
-    onSelect: function() {
-    minDate = j( "#startTime" ).datepicker("getDate");
-    var mDate = new Date(minDate.setDate(minDate.getDate()));
-    maxDate = new Date(minDate.setDate(minDate.getDate() + 30));
-j("#endTime").datepicker("setDate", maxDate);
-j( "#endTime" ).datepicker( "option", "minDate", mDate);
-j( "#endTime" ).datepicker( "option", "maxDate", maxDate);
-}
-});
-var tdate = new Date();
-var ddate = new Date(tdate.setDate(tdate.getDate() + 10));
-j("#startTime").datepicker("setDate", new Date());
-j( "#endTime" ).datepicker();
-j("#endTime").datepicker("setDate",ddate);
-  });
-</script>
+
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script><div>Please Select Dates:</div>
-	 <p>Strat Date:<input id ="startTime" type="text" ></input></p>
-	 <p>End Date:<input id ="endTime" type="text" ></input></p>
+
 
 
 
@@ -160,80 +160,6 @@ j("#endTime").datepicker("setDate",ddate);
 
 
 
-<script>
-$(document).ready(function(){
-  $("#hide").click(function(){
-    $(".bookall").hide();
-    $(".childhide").hide();
-    $(".childb").show();
-    $(".konk").hide();
-    $(".raj").hide();
-
-  });
-  $("#show").click(function(){
-    $(".bookall").show();
-    $(".childb").hide();
-    $(".childhide").show();
-    $(".konk").show();
-    $(".raj").show();
-  });
-});
-
-
-$(".konk").click(function(){
-    $("#rdepart1").hide();
-    $("#rdepart2").hide();
-    $("#kdepart1").show();
-    $("#kdepart2").show();
-
-var printBorder = $(".konk").css("border-color", "goldenrod");
-function changeBorder() {printBorder}
-$(".konk").on("click", changeBorder);
-
-var printBorder = $(".raj").css("border-color", "white");
-function changeBorder() {printBorder}
-$(".raj").on("click", changeBorder);
-
-});
-$(".raj").click(function(){
-    $("#kdepart1").hide();
-    $("#kdepart2").hide();
-    $("#rdepart1").show();
-    $("#rdepart2").show();
-var printBorder = $(".raj").css("border-color", "goldenrod");
-function changeBorder() {printBorder}
-$(".raj").on("click", changeBorder);
-
-var printBorder = $(".konk").css("border-color", "white");
-function changeBorder() {printBorder}
-$(".konk").on("click", changeBorder);
-
-
-  });
-</script>
-    <script>
-  // ---------horizontal-navbar-menu-----------
-		var tabsNewAnim = $('#navbar-animmenu');
-		var selectorNewAnim = $('#navbar-animmenu').find('li').length;
-		//var selectorNewAnim = $(".tabs").find(".selector");
-		var activeItemNewAnim = tabsNewAnim.find('.active');
-		var activeWidthNewAnimWidth = activeItemNewAnim.innerWidth();
-		var itemPosNewAnimLeft = activeItemNewAnim.position();
-		$(".hori-selector").css({
-			"left":itemPosNewAnimLeft.left + "px",
-			"width": activeWidthNewAnimWidth + "px"
-		});
-		$("#navbar-animmenu").on("click","li",function(e){
-			$('#navbar-animmenu ul li').removeClass("active");
-			$(this).addClass('active');
-			var activeWidthNewAnimWidth = $(this).innerWidth();
-			var itemPosNewAnimLeft = $(this).position();
-			$(".hori-selector").css({
-				"left":itemPosNewAnimLeft.left + "px",
-				"width": activeWidthNewAnimWidth + "px"
-			});
-		});
-</script>
 
 </html>
     {% endblock %}

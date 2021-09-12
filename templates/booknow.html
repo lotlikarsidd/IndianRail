@@ -303,7 +303,7 @@ i {
 
 
 
-<form action="/confirm/ " method="POST">
+<form action="/confirm/" method="POST">
     {% csrf_token %}
 <div style="margin-left:200px;margin-top:100px;background-color:white;" class="card">
   <div class="container" style="background-color:white;">
@@ -314,7 +314,6 @@ i {
       <div style="width:700px;border-radius:10px;background-color:white;margin-left:100px"id="order-details-booking"><br>
         <div class="row">
           <div   class="form-holder col-xs-12">
-              <input required type="number" name="countp">
             <div class="input-field col s4">
                 <input required style="border-radius:5px;border:1px solid black;width:650px"type="text" id="item-code" name="pname" placeholder="Passenger Name"/>
             </div><br>

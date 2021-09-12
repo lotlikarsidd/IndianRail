@@ -2,7 +2,19 @@
 {% block content %}
 <html>
 <body>
-<p>Booking is confirmed please check your my tickets</p>
+<h1 align="center">Booking is confirmed</h1>
 </body>
 </html>
+<script>
+let a=document.createElement('a');
+a.target='_blank';
+a.href="/myticket";
+
+//then use this code for alert
+if (window.confirm('Ok to Confirm, Cancel to Stay here'))
+{
+a.click();
+};
+
+</script>
 {% endblock %}

@@ -7,6 +7,8 @@ from Bookticket.models import Customer
 from collections import OrderedDict
 from datetime import datetime
 import itertools
+from django.contrib import messages
+
 
 
 from .models import Customer,Routes, Trains, Schedule, Time as timetrain
@@ -23,7 +25,8 @@ from django.views.generic.base import TemplateView
 
 
 # Create your views here.
-
+global page
+page=0
 
 
 def home(request):
@@ -31,6 +34,11 @@ def home(request):
 
 
 def booktick(request):
+    images=[]
+    images.append(1);
+    images.append(2);
+    images.append(3);
+
 
     source="Goa"
     destination="Karnataka"
@@ -52,7 +60,7 @@ def booktick(request):
     print("destinations")
     print(destlist)
     today=datetime.today().strftime('%Y-%m-%d')
-    return render(request, 'bookticket.html',{'sourcelist':sourcelist,'destlist':destlist,'today':today})
+    return render(request, 'bookticket.html',{'sourcelist':sourcelist,'destlist':destlist,'today':today, 'images':images})
 
 
 
@@ -177,6 +185,7 @@ today = date.today()
 
 def booknow(request):
     if request.method == 'POST':
+        p_age = request.POST.get("page")
         name = request.POST.get('name')
         route = request.POST.get('route')
         arrival = request.POST.get('arrival')
@@ -185,15 +194,20 @@ def booknow(request):
         dest = request.POST.get('dest')
         depart = request.POST.get('depart')
         count = request.POST.get('count')
+        page = request.POST.get('page')
 
 
 
-        # uncommenting print(stack.pop())
-        # will cause an IndexError
-        # as the stack is now empty
+        return render(request, 'booknow.html',{'name':name,'route':route,'arrival':arrival,'source':source,'date':date,'dest':dest,'depart':depart})
 
 
-    return render(request, 'booknow.html',{'name':name,'route':route,'arrival':arrival,'source':source,'date':date,'dest':dest,'depart':depart})
+
+        # CancelFromTrain("S3",36,180,0,30)
+
+        # Initializing the train
+
+
+
 
 
 def Timeme(request):
@@ -273,6 +287,226 @@ def createpost(request):
     return render(request, 'bookticket.html')
 
 def confirm(request):
+    global page
+    page=request.POST.get("page")
+
+    class Train:
+        No_of_compartments = 5
+        No_of_Seats = 72
+        No_of_Berths = 2
+        No_of_SeatsReserved = int(6 * No_of_compartments)
+        AvailableLowerBerth = int(((No_of_Seats * No_of_compartments) / No_of_Berths) - No_of_SeatsReserved)
+        AvailableUpperBerth = int((No_of_Seats * No_of_compartments) / No_of_Berths)
+        AvailableReserved = No_of_SeatsReserved
+        LowerBerth = []
+        UpperBerth = []
+        Reserved = []
+        CanceledUpper = []
+        CanceledLower = []
+
+        def IntializeSeats(self):
+
+            # Lower Berth
+
+            leftFromCentreForLower = 22
+            RightFromCentreForLower = 51
+
+            for x in range(0, 15):
+                self.LowerBerth.append('S5 ' + str(RightFromCentreForLower))
+                self.LowerBerth.append('S5 ' + str(leftFromCentreForLower))
+                self.LowerBerth.append('S1 ' + str(RightFromCentreForLower))
+                self.LowerBerth.append('S1 ' + str(leftFromCentreForLower))
+                self.LowerBerth.append('S4 ' + str(RightFromCentreForLower))
+                self.LowerBerth.append('S4 ' + str(leftFromCentreForLower))
+                self.LowerBerth.append('S2 ' + str(RightFromCentreForLower))
+                self.LowerBerth.append('S2 ' + str(leftFromCentreForLower))
+                self.LowerBerth.append('S3 ' + str(RightFromCentreForLower))
+                self.LowerBerth.append('S3 ' + str(leftFromCentreForLower))
+                leftFromCentreForLower = leftFromCentreForLower + 1
+                RightFromCentreForLower = RightFromCentreForLower - 1
+
+            # Upper Berth
+
+            leftFromCentreForUpper = 1
+            RightFromCentreForUpper = 72
+
+            for x in range(0, 18):
+                self.UpperBerth.append('S5 ' + str(RightFromCentreForUpper))
+                self.UpperBerth.append('S5 ' + str(leftFromCentreForUpper))
+                self.UpperBerth.append('S1 ' + str(RightFromCentreForUpper))
+                self.UpperBerth.append('S1 ' + str(leftFromCentreForUpper))
+                self.UpperBerth.append('S4 ' + str(RightFromCentreForUpper))
+                self.UpperBerth.append('S4 ' + str(leftFromCentreForUpper))
+                self.UpperBerth.append('S2 ' + str(RightFromCentreForUpper))
+                self.UpperBerth.append('S2 ' + str(leftFromCentreForUpper))
+                self.UpperBerth.append('S3 ' + str(RightFromCentreForUpper))
+                self.UpperBerth.append('S3 ' + str(leftFromCentreForUpper))
+                leftFromCentreForUpper = leftFromCentreForUpper + 1
+                RightFromCentreForUpper = RightFromCentreForUpper - 1
+
+            # Reserved
+
+            self.Reserved.append('S5 ' + str(54))
+            self.Reserved.append('S5 ' + str(19))
+            self.Reserved.append('S1 ' + str(54))
+            self.Reserved.append('S1 ' + str(19))
+            self.Reserved.append('S4 ' + str(54))
+            self.Reserved.append('S4 ' + str(19))
+            self.Reserved.append('S2 ' + str(54))
+            self.Reserved.append('S2 ' + str(19))
+            self.Reserved.append('S3 ' + str(54))
+            self.Reserved.append('S3 ' + str(19))
+            self.Reserved.append('S5 ' + str(53))
+            self.Reserved.append('S5 ' + str(20))
+            self.Reserved.append('S1 ' + str(53))
+            self.Reserved.append('S1 ' + str(20))
+            self.Reserved.append('S4 ' + str(53))
+            self.Reserved.append('S4 ' + str(20))
+            self.Reserved.append('S2 ' + str(53))
+            self.Reserved.append('S2 ' + str(20))
+            self.Reserved.append('S3 ' + str(53))
+            self.Reserved.append('S3 ' + str(20))
+            self.Reserved.append('S5 ' + str(52))
+            self.Reserved.append('S5 ' + str(21))
+            self.Reserved.append('S1 ' + str(52))
+            self.Reserved.append('S1 ' + str(21))
+            self.Reserved.append('S4 ' + str(52))
+            self.Reserved.append('S4 ' + str(21))
+            self.Reserved.append('S2 ' + str(52))
+            self.Reserved.append('S2 ' + str(21))
+            self.Reserved.append('S3 ' + str(52))
+            self.Reserved.append('S3 ' + str(21))
+
+        # Ticket Booking
+        def Book_Ticket(self, Age):
+            seatno = []
+            Berth = [" LOWER "]
+            self.AvailableLowerBerth = self.AvailableLowerBerth - 1
+            if Age > 64:
+                if (len(self.CanceledLower)):
+                    seatno.append(self.CanceledLower.pop())
+                elif (len(self.LowerBerth)):
+                    seatno.append(self.LowerBerth.pop())
+                elif (len(self.Reserved)):
+                    seatno.append(self.Reserved.pop())
+                    self.AvailableReserved = self.AvailableReserved - 1
+                    self.AvailableLowerBerth = self.AvailableLowerBerth + 1
+                else:
+                    seatno.append("No Seat Available")
+                    self.AvailableLowerBerth = self.AvailableLowerBerth + 1
+            else:
+                if (len(self.CanceledUpper)):
+                    seatno.append(self.CanceledUpper.pop())
+                    Berth = [" UPPER "]
+                    self.AvailableUpperBerth = self.AvailableUpperBerth - 1
+                    self.AvailableLowerBerth = self.AvailableLowerBerth + 1
+                elif (len(self.UpperBerth)):
+                    seatno.append(self.UpperBerth.pop())
+                    Berth = [" UPPER "]
+                    self.AvailableUpperBerth = self.AvailableUpperBerth - 1
+                    self.AvailableLowerBerth = self.AvailableLowerBerth + 1
+                elif (len(self.CanceledLower)):
+                    seatno.append(self.CanceledLower.pop())
+                elif (len(self.LowerBerth)):
+                    seatno.append(self.LowerBerth.pop())
+                elif (len(self.Reserved)):
+                    seatno.append(self.Reserved.pop())
+                    self.AvailableReserved = self.AvailableReserved - 1
+                    self.AvailableLowerBerth = self.AvailableLowerBerth + 1
+                else:
+                    self.AvailableLowerBerth = self.AvailableLowerBerth + 1
+            return (seatno, Berth[0])
+
+        ''' For Testing only
+        def test(self):
+            print('\nYour Ticket:')
+            for x in range(0,45):
+                self.Book_Ticket("abc",68)
+                self.Book_Ticket("sdsff",25)
+                self.Book_Ticket("hjsh",65)
+
+        '''
+
+        def Booking_Counter(self):
+            noOfTickets = int(input("How Many Tickets You want To book "))
+            for n in range(0, noOfTickets):
+                name = input("Name on Ticket  ")
+                age = int(input("Age "))
+                self.Book_Ticket(name, age)
+
+        def Cancel_Ticket(self, cno, sno):
+            if sno == 19 or sno == 20 or sno == 21 or sno == 52 or sno == 53 or sno == 54:
+                self.Reserved.append(cno + " " + str(sno))
+                self.AvailableReserved = self.AvailableReserved + 1
+                print('Canceled Lower Reserved ')
+                print(self.Reserved)
+            elif sno > 21 and sno < 52:
+                self.CanceledLower.append(cno + " " + str(sno))
+                self.AvailableLowerBerth = self.AvailableLowerBerth + 1
+                print('Canceled Lower Berth ')
+                print(self.CanceledLower)
+            else:
+                self.CanceldUpper.append(cno + " " + str(sno))
+                self.AvailableUpperBerth = self.AvailableUpperBerth + 1
+                print('Canceled Upper Berth ')
+                print(self.CanceledUpper)
+
+    def BookIntoTrain(age, lCount, UCount, RCount):
+        Train1 = Train()
+        Train1.IntializeSeats()
+        if (lCount != 0):
+            for n in range(0, lCount):
+                Train1.Book_Ticket(68)
+        if (UCount != 0):
+            for n in range(0, UCount):
+                Train1.Book_Ticket(34)
+        if (RCount != 0):
+            for n in range(0, RCount):
+                Train1.Book_Ticket(63)
+        (seatid, berth) = Train1.Book_Ticket(age)
+        print(berth)
+        tno = str(seatid.pop())
+        print(tno)
+
+        del Train1
+        # Save the following on the database besides the train
+        # Train1.AvailableLowerBerth
+        # Train1.AvailableUpperBerth
+        # Train1.AvailableReserved
+
+        # save the tno into the passenger ticket no
+
+    def CancelFromTrain(CompNo, Seatno, lCount, UCount, Rcount):
+        Train1 = Train()
+        Train1.IntializeSeats()
+        for n in range(0, lCount):
+            Train1.Book_Ticket(68)
+        for n in range(0, UCount):
+            Train1.Book_Ticket(34)
+        for n in range(0, Rcount):
+            Train1.Book_Ticket(63)
+        Train1.Cancel_Ticket(CompNo, Seatno)
+        print("your ticket " + CompNo + " " + str(Seatno) + "is Canceled")
+        del Train1
+
+        # Save the following on the database besides the train
+        # Train1.AvailableLowerBerth
+        # Train1.AvailableUpperBerth
+        # Train1.AvailableReserved
+
+        # delete the passenger ID to this ticket number
+
+    # use these funtions to book or cancel ticket
+    page=int(page)
+
+    BookIntoTrain(page, 0, 0, 0)  # enter the age and count values
+    print("after bookinto call")
+    messages.info(request, 'Your password has been changed successfully!')
+    '''
+    return render(request, 'booknow.html',
+                  {'name': name, 'route': route, 'arrival': arrival, 'source': source, 'date': date, 'dest': dest,
+                   'depart': depart})
+    '''
     return render(request, 'confirmation.html')
 
 
