@@ -9,7 +9,7 @@ from datetime import datetime
 import itertools
 
 
-from .models import Customer,Routes, Trains, Schedule, Time
+from .models import Customer,Routes, Trains, Schedule, Time as timetrain
 from django.contrib.auth.hashers import make_password, check_password
 # Create your views here.
 
@@ -184,21 +184,15 @@ def booknow(request):
         date= request.POST.get('date')
         dest = request.POST.get('dest')
         depart = request.POST.get('depart')
-        id = request.POST.get('id')
+        count = request.POST.get('count')
 
 
 
+        # uncommenting print(stack.pop())
+        # will cause an IndexError
+        # as the stack is now empty
 
 
-
-
-
-
-
-
-        dateinput = request.POST.get('dateinput')
-        sourceinput = request.POST.get('sourceinput')
-        destinput = request.POST.get('destinput')
     return render(request, 'booknow.html',{'name':name,'route':route,'arrival':arrival,'source':source,'date':date,'dest':dest,'depart':depart})
 
 
@@ -257,10 +251,15 @@ def train(request):
                 ldepart.append("22:00")
                 print(larrival)
         print("1")
-        sql2='select * from "Bookticket_trains" where "Train_id"!=%s and "Time_id_id"!=%s'
-        for q in Trains.objects.raw(sql2, (trainid,yy)):
+        sql2='select * from "Bookticket_trains" where "Train_id"=%s and "Time_id_id"!=%s'
+        for q in Trains.objects.raw(sql2, (trainid, yy)):
+            print(q.Train_name)
             print(q)
         print("2")
+        sql6='select * from "Bookticket_time" where "Time_id"=%s and "Arrival_Time"!=%s'
+        for i in timetrain.objects.raw(sql6, (r.Time_id_id, str(yy))):
+            print(i.Arrival_Time,"hellooooo")
+            print(i.Departure_Time)
         Trainname=r.Train_name
         ldetails=list(itertools.zip_longest( ltrainname, ltrainid,larrival,ldepart))
         for (f, r, idd, t) in (itertools.zip_longest(lfare, lroute, ltrainid, ltrainname)):
@@ -272,5 +271,8 @@ def train(request):
 
 def createpost(request):
     return render(request, 'bookticket.html')
+
+def confirm(request):
+    return render(request, 'confirmation.html')
 
 

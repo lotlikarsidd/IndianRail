@@ -303,7 +303,7 @@ i {
 
 
 
-<form action=" " method="post">
+<form action="/confirm/ " method="POST">
     {% csrf_token %}
 <div style="margin-left:200px;margin-top:100px;background-color:white;" class="card">
   <div class="container" style="background-color:white;">
@@ -314,22 +314,23 @@ i {
       <div style="width:700px;border-radius:10px;background-color:white;margin-left:100px"id="order-details-booking"><br>
         <div class="row">
           <div   class="form-holder col-xs-12">
+              <input required type="number" name="countp">
             <div class="input-field col s4">
-                <input style="border-radius:5px;border:1px solid black;width:650px"type="text" id="item-code" placeholder="Passenger Name"/>
+                <input required style="border-radius:5px;border:1px solid black;width:650px"type="text" id="item-code" name="pname" placeholder="Passenger Name"/>
             </div><br>
             <div class="input-field col s2">
-                <input style="border-radius:5px;border:1px solid black;width:650px"type="number" id="item-code" placeholder="Enter age of passenger" />
+                <input required style="border-radius:5px;border:1px solid black;width:650px"type="number" id="item-code" name="page" placeholder="Enter age of passenger" />
             </div><br>
             <div class="input-field col s5">
-                <input style="border-radius:5px;border:1px solid black;width:650px"type="number" min="1" max="100" id="item-code" placeholder="Enter Phone no. of passenger" />
+                <input required style="border-radius:5px;border:1px solid black;width:650px"type="number" min="10"  id="item-code" placeholder="Enter Phone no. of passenger" />
             </div><br>
               <div class="input-field col s6">
-                <input style="border-radius:5px;border:1px solid black;width:650px"type="number" id="item-code" placeholder="Enter Aadhaar no. of passenger" />
+                <input required style="border-radius:5px;border:1px solid black;width:650px"type="number" min="12"  id="item-code" placeholder="Enter Aadhaar no. of passenger" />
               </div><br>
               <div style="margin-left:20px;">
-                  <b>Gender:</b> male <input type="radio" name="gender">
-                    female <input type="radio" name="gender">
-                    others <input type="radio" name="gender">
+                  <b>Gender:</b>  <input required type="radio" name="gender">male
+                     <input type="radio" name="gender">female
+                     <input type="radio" name="gender">others
               </div><br>
               <div class="col s1">
                 <i class="material-icons remove" style="background-color:white;border-radius:5px;"><b style="width:100px;cursor: pointer;padding-left:10px;padding-right:10px;background-color:#fb792b;color:white;border-radius:5px;">- Remove Details</b></i>
@@ -346,11 +347,11 @@ i {
           </div>
     </div>
   </div>
-    <input style="margin-left:350px;padding-left:10px;width:220px;border-radius:5px;background-color:#fb792b;border:1px solid #fb792b;color:white;right-padding:30px;font-weight:bold;" onclick="location.href='/booknow';" type="submit" value="BOOK NOW"></input>
+    <input style="margin-left:350px;padding-left:10px;width:220px;border-radius:5px;background-color:#fb792b;border:1px solid #fb792b;color:white;right-padding:30px;font-weight:bold;"  type="submit" value="BOOK NOW"></input>
   </div>
 </div>
 </form>
-
+<!--location.href='/booknow';-->
 
 
 <script>
