@@ -53,3 +53,4 @@ function updateDivs(select){
 				"width": activeWidthNewAnimWidth + "px"
 			});
 		});
+

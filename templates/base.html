@@ -15,6 +15,71 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="{% static 'script/script.js' %}"  ></script>
 <style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 14px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  width: 50px;
+  height: 24px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #FF5733;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 10px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.dark-mode {
+  background-color: #171717;
+  color: white;
+  }
   #navbar-animmenu {
 	background: #F7A200;
 	float: left;
@@ -143,7 +208,10 @@
         <li class="nav-item">
         <a class="nav-link bg-light" href="/logout/">Logout <b style="color:black">|</b></a>
       </li>
-        <p style="margin-left:150px;;"><a  class="btn btn-sm btn-outline-primary m-2"  href=" ">{{user|title}}</a></p>
+        <p style="margin-left:20px;"><a  class="btn btn-sm btn-outline-primary m-2"  href=" ">{{user|title}}</a></p>
+        <label style="margin-top:12px;margin-left:200px" class="switch">
+        <input  onclick="myFunction()" type="checkbox">
+        <span class="slider round"></span></label>
           {% else %}
       <li class="nav-item">
         <a class="nav-link bg-light" href="/login/">Login <b style="color:black">|</b></a>
